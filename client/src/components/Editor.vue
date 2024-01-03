@@ -56,12 +56,14 @@ export default {
 
             axios.post(path, requestData)
                 .then((res) => {
-                    this.submissionResult = res.data;
+                    this.submissionResult = res;
+                    console.log(res.data.status.description)
+                    console.log(atob(res.data.stdout))
+                    console.log(atob(res.data.expected_output))
                 })
                 .catch((error) => {
                     console.error(error);
                 });
-            console.log(this.submissionResult)
         },
     },
 };
