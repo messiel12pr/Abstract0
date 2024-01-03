@@ -71,38 +71,29 @@ export default {
 
 
 <style scoped>
-body {
-    overflow: hidden;
-    margin: 0;
-    /* Remove default margin */
-    background-color: #282A36
-}
-
 #editor {
     width: 65%;
     /* Set the desired width of the editor */
-    height: 98%;
+    height: 97%;
     /* Set the desired height of the editor */
-    margin: 12px;
+    margin: 0.9%;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    border-radius: 10px;
+    border-radius: 1.5%;
 }
 
 #submitButton {
     position: absolute;
-    top: 94%;
-    /* Adjust top position as needed */
-    left: 66%;
-    /* Adjust left position as needed */
-    z-index: 1;
-    /* Set a higher z-index to ensure it appears above #editor */
+    top: 91.5%;
+    margin: 0%;
+    left: 67%;
+    z-index: 1%;
     color: #282A36;
     border-color: black;
     background-color: #F1FA8C;
-    padding: 8px 50px;
+    padding: 1% 3%;
 }
 </style>
