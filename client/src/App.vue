@@ -1,8 +1,10 @@
 <template>
   <RouterView />
   <div>
-    <!-- Other components or content -->
+    <!-- NavBarComponent -->
     <Editor />
+    <!-- ProblemDescriptionComponent -->
+    <!-- SubmissionResultComponent -->
   </div>
 </template>
 
@@ -20,4 +22,3 @@ export default {
   // Other component options...
 };
 </script>
-
