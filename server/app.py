@@ -1,4 +1,5 @@
-from flask import Flask, jsonify
+import time
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import requests
 import base64
@@ -12,24 +13,37 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 
 
 # sanity check route
-@app.route('/ping', methods=['GET'])
-def ping_pong():
-    return jsonify('pong!')
+@app.route('/submit', methods=['POST'])
+def submit():
+    try:
+        data = request.get_json()
+        print(data)
+        token = post_submission(get_language_id(data["language"]), data["code"], "", "")
+        result = ''
+
+        while True:
+            result = get_submission_result(token)
+            if result['status']['id'] > 2:
+                print(result)
+                return jsonify(result)
+            time.sleep(.2)
+            
+        return result
+    
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 
 if __name__ == '__main__':
     app.run()
 
-def post_submission(language_id: int, source_code_path: str, input: str, expected_output: str):
+def post_submission(language_id: int, code: str, input: str, expected_output: str):
     url = "https://judge0-ce.p.rapidapi.com/submissions"
     querystring = {"base64_encoded":"true","fields":"*"}
 
-    with open(source_code_path, 'r') as file:
-        source_code = file.read()
-
     payload = {
         "language_id": language_id,
-        "source_code": base64.b64encode(source_code.encode()).decode(),
+        "source_code": base64.b64encode(code.encode()).decode(),
         "stdin": input,
         "expected_output": base64.b64encode(expected_output.encode()).decode()
     }
@@ -52,4 +66,12 @@ def get_submission_result(token: str):
 
     return requests.get(url, headers=headers, params=querystring).json()
 
-#result = get_submission_result(post_submission(71, 'Hello_World.py', '', 'Hello Friends!'))
+def get_language_id(language: str):
+    if language.strip() == "python":
+        return 71
+    
+    if language.strip() == "c++":
+        return 76
+    
+    if language.strip() == "javascript":
+        return 93
