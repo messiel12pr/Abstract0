@@ -14,6 +14,18 @@
                 </li>
             </ul>
         </div>
+        <div id="submission-container">
+            <h4>Submission Details</h4>
+            <div id="submission-details" v-if="state.submission">
+                <ul>
+                    <li>Result: {{ state.submissionResult }}</li>
+                    <li>Standard Output: {{ state.stdout }}</li>
+                    <li>Expected Output: {{ state.expectedOutput }}</li>
+                </ul>
+
+            </div>
+            <div v-else>Hang in there, code is on its way...</div>
+        </div>
     </div>
 </template>
   
@@ -35,7 +47,6 @@ export default {
         editor.setShowPrintMargin(false);
         editor.setTheme('ace/theme/one_dark');
         editor.session.setMode(this.state.language);
-        console.log(this.state.language);
         editor.getSession().setUseWrapMode(true);
         editor.setValue(this.state.user_input, 1);
 
@@ -51,7 +62,10 @@ export default {
             state: {
                 language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
                 user_input: localStorage.getItem('editorContent') || '',
-                submissionResult: localStorage.getItem('submissionResult') || '',
+                submission: false,
+                submissionResult: '',
+                stdout: '',
+                expectedOutput: '',
             },
         };
     },
@@ -69,13 +83,13 @@ export default {
 
             axios.post(path, requestData)
                 .then((res) => {
-                    this.state.submissionResult = res;
-                    console.log(res.data.status.description)
-                    console.log(atob(res.data.stdout))
-                    console.log(atob(res.data.expected_output))
+                    this.state.submission = true;
+                    this.state.submissionResult = res.data.status.description
+                    this.state.stdout = atob(res.data.stdout)
+                    this.state.expectedOutput = atob(res.data.expectedOutput)
                 })
                 .catch((error) => {
-                    console.error(error);
+                    console.error(error.data);
                 });
         },
 
@@ -88,7 +102,7 @@ export default {
             // Save the state to localStorage just before the page is unloaded
             localStorage.setItem('editorLanguage', this.state.language);
             localStorage.setItem('editorContent', this.state.user_input);
-            localStorage.setItem('submissionResult', this.state.submissionResult);
+            // Save submission data in db
         },
     },
 
@@ -156,5 +170,22 @@ export default {
 
 .dropdown-menu {
     background-color: #e4e6eb;
+}
+
+#submission-container {
+    overflow: hidden;
+    background-color: #e4e6eb;
+    width: 32%;
+    height: 15%;
+    position: absolute;
+    top: 74.5%;
+    margin: 0 auto;
+    left: 67%;
+    border-radius: 1.5%;
+    text-align: center;
+}
+
+#submission-details {
+    text-align: left;
 }
 </style>
