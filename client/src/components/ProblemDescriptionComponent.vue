@@ -1,6 +1,6 @@
 <template>
     <div id="container">
-        <div v-if="htmlContent" v-html="htmlContent"></div>
+        <div id="description" v-if="htmlContent" v-html="htmlContent"></div>
         <div v-else>Loading...</div>
     </div>
 </template>
@@ -13,8 +13,7 @@ export default {
         };
     },
     mounted() {
-        // Replace 'description.html' with the path to your HTML file
-        fetch('/path/to/description.html')
+        fetch('../problem_description.html')
             .then(response => response.text())
             .then(html => {
                 this.htmlContent = html;
@@ -29,18 +28,21 @@ export default {
 <style scoped>
 #container {
     overflow: hidden;
-    margin: 0%;
-    /* Remove default margin */
     background-color: #e4e6eb;
     width: 32%;
-    /* Set the desired width of the editor */
     height: 70%;
-    /* Set the desired height of the editor */
     margin: 1%;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 66%;
     border-radius: 1.5%;
+    overflow-y: scroll;
+}
+
+#description {
+    margin: 6%;
+    width: 90%;
+    height: 90%;
 }
 </style>
