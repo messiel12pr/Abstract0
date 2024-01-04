@@ -106,7 +106,9 @@ export default {
     color: #282A36;
     border-color: black;
     background-color: #F1FA8C;
-    padding: 1% 3%;
+    font-size: 1vw;
+    width: 10vw;
+    height: 7vh;
 }
 
 #dropdown-container {
@@ -121,13 +123,18 @@ export default {
     color: #282A36;
     border-color: black;
     background-color: #F1FA8C;
-    width: 20.1em;
-    height: 3.6em;
+    font-size: 1vw;
+    width: 21vw;
+    height: 7vh;
 }
 
 .dropdown-item {
     color: #282A36;
+    width: 21vw;
+    font-size: 1rem;
+}
+
+.dropdown-menu {
     background-color: #e4e6eb;
-    width: 25em;
 }
 </style>
