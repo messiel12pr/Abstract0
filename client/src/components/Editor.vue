@@ -8,9 +8,10 @@
                 Language
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">C++</a></li>
-                <li><a class="dropdown-item" href="#">Python</a></li>
-                <li><a class="dropdown-item" href="#">JavaScript</a></li>
+                <li><a class="dropdown-item" href="#" @click="handleDropdownItemClick('ace/mode/c_cpp')">C++</a></li>
+                <li><a class="dropdown-item" href="#" @click="handleDropdownItemClick('ace/mode/python')">Python</a></li>
+                <li><a class="dropdown-item" href="#" @click="handleDropdownItemClick('ace/mode/java')">Java</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -19,7 +20,9 @@
 <script>
 import '../../ace-builds/src-noconflict/ace.js';
 import '../../ace-builds/src-noconflict/theme-one_dark';
+import '../../ace-builds/src-noconflict/mode-c_cpp';
 import '../../ace-builds/src-noconflict/mode-python';
+import '../../ace-builds/src-noconflict/mode-java';
 import axios from 'axios';
 
 export default {
@@ -64,7 +67,7 @@ export default {
                 language: mode,
                 code: this.editor.session.getValue(),
             };
-            dropdown - container
+
             axios.post(path, requestData)
                 .then((res) => {
                     this.submissionResult = res;
@@ -76,6 +79,9 @@ export default {
                     console.error(error);
                 });
         },
+        handleDropdownItemClick(language) {
+            this.editor.session.setMode(language);
+        }
     },
 };
 </script>

@@ -17,7 +17,6 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 def submit():
     try:
         data = request.get_json()
-        print(data)
         token = post_submission(get_language_id(data["language"]), data["code"], "", "")
         result = ''
 
@@ -31,6 +30,7 @@ def submit():
         return result
     
     except Exception as e:
+        print(str(e))
         return jsonify({'error': str(e)})
 
 
@@ -70,8 +70,11 @@ def get_language_id(language: str):
     if language.strip() == "python":
         return 71
     
-    if language.strip() == "c++":
-        return 76
+    if language.strip() == "c_cpp":
+        return 54
+    
+    if language.strip() == "java":
+        return 62
     
     if language.strip() == "javascript":
         return 93
