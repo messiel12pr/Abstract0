@@ -1,7 +1,7 @@
 <template>
     <div>
         <pre id="editor"></pre>
-        <button type="button" @click="submitCode" id="submitButton" class="btn btn-submit btn-lg">Submit</button>
+        <button type="button" @click="submitCode()" id="submitButton" class="btn btn-submit btn-lg">Submit</button>
         <div id="dropdown-container" class="dropup">
             <button id="language-dropdown" class="btn btn-custom dropdown-toggle btn-lg" type="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -30,33 +30,32 @@ export default {
         // This hook is called after the component has been inserted into the DOM
         // and the editor element is available.
 
-        // Initialize Ace editor
         const editor = ace.edit('editor');
         editor.setFontSize(25);
         editor.setShowPrintMargin(false);
         editor.setTheme('ace/theme/one_dark');
-        editor.session.setMode('ace/mode/python');
+        editor.session.setMode(this.state.language);
+        console.log(this.state.language);
         editor.getSession().setUseWrapMode(true);
+        editor.setValue(this.state.user_input, 1);
 
-        // Retrieve content from local storage and set it in the editor
-        const savedContent = localStorage.getItem('editorContent');
-        if (savedContent) {
-            editor.setValue(savedContent, 1);
-        }
-
-        // Update local storage whenever the editor content changes
         editor.on('change', () => {
-            localStorage.setItem('editorContent', editor.getValue());
+            this.state.user_input = editor.getValue();
         });
 
-        // You can store the editor instance in a data property if you need to
         this.editor = editor;
     },
+
     data() {
         return {
-            submissionResult: '',
+            state: {
+                language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
+                user_input: localStorage.getItem('editorContent') || '',
+                submissionResult: localStorage.getItem('submissionResult') || '',
+            },
         };
     },
+
     methods: {
         submitCode() {
             const path = 'http://localhost:5001/submit';
@@ -65,12 +64,12 @@ export default {
 
             const requestData = {
                 language: mode,
-                code: this.editor.session.getValue(),
+                code: this.state.user_input,
             };
 
             axios.post(path, requestData)
                 .then((res) => {
-                    this.submissionResult = res;
+                    this.state.submissionResult = res;
                     console.log(res.data.status.description)
                     console.log(atob(res.data.stdout))
                     console.log(atob(res.data.expected_output))
@@ -79,9 +78,26 @@ export default {
                     console.error(error);
                 });
         },
+
         handleDropdownItemClick(language) {
+            this.state.language = language;
             this.editor.session.setMode(language);
-        }
+        },
+
+        handleBeforeUnload() {
+            // Save the state to localStorage just before the page is unloaded
+            localStorage.setItem('editorLanguage', this.state.language);
+            localStorage.setItem('editorContent', this.state.user_input);
+            localStorage.setItem('submissionResult', this.state.submissionResult);
+        },
+    },
+
+    beforeUnmount() {
+        window.removeEventListener('beforeunload', this.handleBeforeUnload);
+    },
+
+    created() {
+        window.addEventListener('beforeunload', this.handleBeforeUnload);
     },
 };
 </script>
@@ -90,9 +106,7 @@ export default {
 <style scoped>
 #editor {
     width: 65%;
-    /* Set the desired width of the editor */
     height: 97%;
-    /* Set the desired height of the editor */
     margin: 0.9%;
     position: absolute;
     top: 0;
