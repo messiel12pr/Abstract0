@@ -1,7 +1,8 @@
 <template>
     <div>
         <pre id="editor"></pre>
-        <button type="button" @click="submitCode()" id="submitButton" class="btn btn-submit btn-lg">Submit</button>
+        <button type="button" :disabled="isButtonDisabled" @click="submitCode()" id="submitButton"
+            class="btn btn-submit btn-lg">Submit</button>
         <div id="dropdown-container" class="dropup">
             <button id="language-dropdown" class="btn btn-custom dropdown-toggle btn-lg" type="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,11 +68,13 @@ export default {
                 stdout: '',
                 expectedOutput: '',
             },
+            isButtonDisabled: false,
         };
     },
 
     methods: {
         submitCode() {
+            this.isButtonDisabled = true;
             const path = 'http://localhost:5001/submit';
             var mode = this.editor.session.$modeId
             mode = mode.substr(mode.lastIndexOf('/') + 1);
@@ -90,7 +93,9 @@ export default {
                 })
                 .catch((error) => {
                     console.error(error.data);
+                    this.isButtonDisabled = false;
                 });
+
         },
 
         handleDropdownItemClick(language) {
