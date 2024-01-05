@@ -125,10 +125,10 @@ export default {
 <style scoped>
 #editor {
     width: 65%;
-    height: 97%;
+    height: 88%;
     margin: 0.9%;
     position: absolute;
-    top: 0;
+    top: 9%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -186,8 +186,9 @@ export default {
     top: 74.5%;
     margin: 0 auto;
     left: 67%;
-    border-radius: 1.5%;
+    border-radius: 0.5em;
     text-align: center;
+    padding: 1%;
 }
 
 #submission-details {

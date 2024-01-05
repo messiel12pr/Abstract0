@@ -30,10 +30,10 @@ export default {
     overflow: hidden;
     background-color: #e4e6eb;
     width: 32%;
-    height: 70%;
+    height: 61%;
     margin: 1%;
     position: absolute;
-    top: 0;
+    top: 9%;
     bottom: 0;
     left: 66%;
     border-radius: 1.5%;
