@@ -20,16 +20,9 @@
 </template>
   
 <script>
-export default {
-    mounted() {
-        // Your mounted logic here
-    },
-};
 </script>
   
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Monserrat:500');
-
 #container {
     position: absolute;
     width: 98%;
@@ -39,6 +32,10 @@ export default {
     bottom: 0%;
     white-space: nowrap;
     overflow: hidden;
+}
+
+a {
+    background-color: transparent
 }
 
 * {
@@ -63,7 +60,7 @@ header {
 .nav__links a,
 .cta,
 .overlay__content a {
-    font-family: "Montserrat", sans-serif;
+    font-family: sans-serif;
     font-weight: 500;
     font-size: 1.2em;
     color: #edf0f1;
@@ -107,4 +104,3 @@ header {
     display: none;
 }
 </style>
-  
