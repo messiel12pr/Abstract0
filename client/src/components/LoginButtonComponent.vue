@@ -15,3 +15,10 @@ const handleLogin = () => {
 };
 
 </script>
+
+<style scoped>
+button {
+    margin-left: 60%;
+    margin-right: 1.5%;
+}
+</style>
