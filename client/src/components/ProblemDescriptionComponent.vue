@@ -6,22 +6,27 @@
 </template>
   
 <script>
+import { ref, onMounted } from 'vue';
+
 export default {
-    data() {
+    setup() {
+        const htmlContent = ref();
+
+        onMounted(() => {
+            fetch('../problem_description.html')
+                .then(response => response.text())
+                .then(html => {
+                    htmlContent.value = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching HTML:', error);
+                });
+        });
+
         return {
-            htmlContent: null,
-        };
-    },
-    mounted() {
-        fetch('../problem_description.html')
-            .then(response => response.text())
-            .then(html => {
-                this.htmlContent = html;
-            })
-            .catch(error => {
-                console.error('Error fetching HTML:', error);
-            });
-    },
+            htmlContent,
+        }
+    }
 };
 </script>
   
