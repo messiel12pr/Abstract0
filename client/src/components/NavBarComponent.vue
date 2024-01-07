@@ -13,13 +13,23 @@
                     <li><a href="#">Resources</a></li>
                 </ul>
             </nav>
-            <a class="cta" href="#">Support</a>
+            <loginButton class="cta" />
+            <logoutButton class="cta" />
             <p class="menu cta">Menu</p>
         </header>
     </div>
 </template>
   
 <script>
+import loginButton from '../components/LoginButtonComponent.vue';
+import logoutButton from '../components/LogoutButtonComponent.vue';
+
+export default {
+    components: {
+        loginButton,
+        logoutButton
+    },
+};
 </script>
   
 <style scoped>
