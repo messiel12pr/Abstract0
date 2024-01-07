@@ -37,90 +37,101 @@ import '../../ace-builds/src-noconflict/mode-c_cpp';
 import '../../ace-builds/src-noconflict/mode-python';
 import '../../ace-builds/src-noconflict/mode-java';
 import axios from 'axios';
+import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue';
 
 export default {
-    mounted() {
-        // This hook is called after the component has been inserted into the DOM
-        // and the editor element is available.
+    setup() {
+        const state = reactive({
+            language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
+            user_input: localStorage.getItem('editorContent') || '',
+            submission: false,
+            submissionResult: '',
+            stdout: '',
+            expectedOutput: '',
+        },)
 
-        const editor = ace.edit('editor');
-        editor.setFontSize(25);
-        editor.setShowPrintMargin(false);
-        editor.setTheme('ace/theme/one_dark');
-        editor.session.setMode(this.state.language);
-        editor.getSession().setUseWrapMode(true);
-        editor.setValue(this.state.user_input, 1);
-
-        editor.on('change', () => {
-            this.state.user_input = editor.getValue();
+        const editor = reactive({
+            instance: null,
         });
 
-        this.editor = editor;
-    },
+        const isButtonDisabled = ref(false);
 
-    data() {
-        return {
-            state: {
-                language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
-                user_input: localStorage.getItem('editorContent') || '',
-                submission: false,
-                submissionResult: '',
-                stdout: '',
-                expectedOutput: '',
-            },
-            isButtonDisabled: false,
-        };
-    },
+        onMounted(() => {
+            window.addEventListener('beforeunload', handleBeforeUnload);
+            const aceEditor = ace.edit('editor');
+            aceEditor.setFontSize(25);
+            aceEditor.setShowPrintMargin(false);
+            aceEditor.setTheme('ace/theme/one_dark');
+            aceEditor.session.setMode(state.language);
+            aceEditor.getSession().setUseWrapMode(true);
+            aceEditor.setValue(state.user_input, 1);
 
-    methods: {
-        submitCode() {
-            this.isButtonDisabled = true;
+            editor.instance = aceEditor;
+
+            editor.instance.on('change', () => {
+                state.user_input = editor.instance.getValue();
+            });
+        });
+
+        onBeforeUnmount(() => {
+            window.removeEventListener('beforeunload', handleBeforeUnload);
+        });
+
+        const handleBeforeUnload = () => {
+            // Save the state to localStorage just before the page is unloaded
+            localStorage.setItem('editorLanguage', state.language);
+            localStorage.setItem('editorContent', state.user_input);
+            // Save submission data in db
+        }
+
+        const getModeId = () => {
+            if (editor.instance && editor.instance.session) {
+                var mode = editor.instance.session.$modeId
+                return mode.substr(mode.lastIndexOf('/') + 1);
+            }
+            else
+                return null;
+        }
+
+        const submitCode = () => {
+            isButtonDisabled.value = true;
             const path = 'http://localhost:5001/submit';
-            var mode = this.editor.session.$modeId
-            mode = mode.substr(mode.lastIndexOf('/') + 1);
+            const mode = getModeId();
 
             const requestData = {
                 language: mode,
-                code: this.state.user_input,
+                code: state.user_input,
             };
 
             axios.post(path, requestData)
                 .then((res) => {
-                    this.state.submission = true;
-                    this.state.submissionResult = res.data.status.description
-                    this.state.stdout = atob(res.data.stdout)
-                    this.state.expectedOutput = atob(res.data.expectedOutput)
+                    state.submission = true;
+                    state.submissionResult = res.data.status.description
+                    state.stdout = atob(res.data.stdout)
+                    state.expectedOutput = atob(res.data.expectedOutput)
                 })
                 .catch((error) => {
                     console.error(error.data);
-                    this.isButtonDisabled = false;
+                    isButtonDisabled.value = false;
                 });
+        }
 
-        },
+        const handleDropdownItemClick = (language) => {
+            state.language = language;
+            editor.instance.session.setMode(language);
+        }
 
-        handleDropdownItemClick(language) {
-            this.state.language = language;
-            this.editor.session.setMode(language);
-        },
-
-        handleBeforeUnload() {
-            // Save the state to localStorage just before the page is unloaded
-            localStorage.setItem('editorLanguage', this.state.language);
-            localStorage.setItem('editorContent', this.state.user_input);
-            // Save submission data in db
-        },
-    },
-
-    beforeUnmount() {
-        window.removeEventListener('beforeunload', this.handleBeforeUnload);
-    },
-
-    created() {
-        window.addEventListener('beforeunload', this.handleBeforeUnload);
+        return {
+            state,
+            editor,
+            isButtonDisabled,
+            getModeId,
+            submitCode,
+            handleDropdownItemClick,
+        }
     },
 };
 </script>
-
 
 <style scoped>
 #editor {
