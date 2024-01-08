@@ -23,7 +23,6 @@
                     <li>Standard Output: {{ state.stdout }}</li>
                     <li>Expected Output: {{ state.expectedOutput }}</li>
                 </ul>
-
             </div>
             <div v-else>Hang in there, code is on its way...</div>
         </div>
@@ -42,7 +41,7 @@ import { useAuth0 } from '@auth0/auth0-vue';
 
 export default {
     setup() {
-        const { isAuthenticated } = useAuth0();
+        const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
         const state = reactive({
             language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
@@ -104,7 +103,7 @@ export default {
                 return null;
         }
 
-        const submitCode = () => {
+        const submitCode = async () => {
             isButtonDisabled.value = true;
             const path = 'http://localhost:5001/submit';
             const mode = getModeId();
@@ -114,7 +113,9 @@ export default {
                 code: state.user_input,
             };
 
-            axios.post(path, requestData)
+            const token = await getAccessTokenSilently();
+
+            axios.post(path, requestData, { headers: { Authorization: 'Bearer ' + token } })
                 .then((res) => {
                     state.submission = true;
                     state.submissionResult = res.data.status.description
