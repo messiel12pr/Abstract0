@@ -38,9 +38,12 @@ import '../../ace-builds/src-noconflict/mode-python';
 import '../../ace-builds/src-noconflict/mode-java';
 import axios from 'axios';
 import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue';
+import { useAuth0 } from '@auth0/auth0-vue';
 
 export default {
     setup() {
+        const { isAuthenticated } = useAuth0();
+
         const state = reactive({
             language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
             user_input: localStorage.getItem('editorContent') || '',
@@ -71,6 +74,14 @@ export default {
             editor.instance.on('change', () => {
                 state.user_input = editor.instance.getValue();
             });
+
+            if (!isAuthenticated.value) {
+                isButtonDisabled.value = true;
+                alert("Log in, in order to submit code")
+            }
+
+            else
+                isButtonDisabled.value = false;
         });
 
         onBeforeUnmount(() => {
@@ -128,6 +139,7 @@ export default {
             getModeId,
             submitCode,
             handleDropdownItemClick,
+            isAuthenticated,
         }
     },
 };

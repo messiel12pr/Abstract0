@@ -5,15 +5,8 @@ import { createAuth0 } from '@auth0/auth0-vue'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import Editor from './components/Editor.vue';
-import ProblemDescriptionComponent from './components/ProblemDescriptionComponent.vue';
-import NavBarComponent from './components/NavBarComponent.vue';
 
 const app = createApp(App)
-
-app.component('Editor', Editor);
-app.component('ProblemDescriptionComponent', ProblemDescriptionComponent);
-app.component('NavBarComponent', NavBarComponent);
 
 app
   .use(router)
@@ -24,6 +17,8 @@ app
       authorizationParams: {
         redirect_uri: import.meta.env.VITE_AUTH0_CALLBACK_URL,
       },
+      useRefreshTokens: 'true',
+      cacheLocation: 'localstorage',
     })
   )
 app.mount('#app')

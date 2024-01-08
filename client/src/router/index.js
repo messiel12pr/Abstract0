@@ -1,15 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Editor from '../components/Editor.vue'
-
-const CallbackComponent = () => import("../components/CallbackComponent.vue");
+import EditorPage from '../pages/EditorPage.vue'
+import EditorComponent from '../components/Editor.vue'
+import CallbackComponent from '../components/CallbackComponent.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: EditorPage
+    },
+    {
       path: '/submit',
       name: 'submit',
-      component: Editor
+      component: EditorComponent
     },
     {
       path: '/callback',
