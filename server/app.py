@@ -1,6 +1,3 @@
-"""Python Flask API Auth0 integration example
-"""
-
 from os import environ as env
 
 from dotenv import load_dotenv, find_dotenv
@@ -37,7 +34,7 @@ def public():
 
 @app.route("/submit", methods=['POST'])
 @require_auth(None)
-def private():
+def submit():
     """A valid access token is required."""
 
     try:
