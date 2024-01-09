@@ -23,7 +23,6 @@
                     <li>Standard Output: {{ state.stdout }}</li>
                     <li>Expected Output: {{ state.expectedOutput }}</li>
                 </ul>
-
             </div>
             <div v-else>Hang in there, code is on its way...</div>
         </div>
@@ -38,9 +37,12 @@ import '../../ace-builds/src-noconflict/mode-python';
 import '../../ace-builds/src-noconflict/mode-java';
 import axios from 'axios';
 import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue';
+import { useAuth0 } from '@auth0/auth0-vue';
 
 export default {
     setup() {
+        const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+
         const state = reactive({
             language: localStorage.getItem('editorLanguage') || 'ace/mode/python',
             user_input: localStorage.getItem('editorContent') || '',
@@ -71,6 +73,14 @@ export default {
             editor.instance.on('change', () => {
                 state.user_input = editor.instance.getValue();
             });
+
+            if (!isAuthenticated.value) {
+                isButtonDisabled.value = true;
+                alert("Log in, in order to submit code");
+            }
+
+            else
+                isButtonDisabled.value = false;
         });
 
         onBeforeUnmount(() => {
@@ -93,27 +103,36 @@ export default {
                 return null;
         }
 
-        const submitCode = () => {
-            isButtonDisabled.value = true;
-            const path = 'http://localhost:5001/submit';
-            const mode = getModeId();
+        const submitCode = async () => {
+            try {
+                const token = await getAccessTokenSilently();
+                isButtonDisabled.value = true;
+                const path = 'http://localhost:5001/submit';
+                const mode = getModeId();
 
-            const requestData = {
-                language: mode,
-                code: state.user_input,
-            };
+                const requestData = {
+                    language: mode,
+                    code: state.user_input,
+                };
 
-            axios.post(path, requestData)
-                .then((res) => {
-                    state.submission = true;
-                    state.submissionResult = res.data.status.description
-                    state.stdout = atob(res.data.stdout)
-                    state.expectedOutput = atob(res.data.expectedOutput)
-                })
-                .catch((error) => {
-                    console.error(error.data);
-                    isButtonDisabled.value = false;
-                });
+                axios.post(path, requestData, { headers: { 'authorization': 'Bearer ' + token } })
+                    .then((res) => {
+                        state.submission = true;
+                        state.submissionResult = res.data.status.description
+                        state.stdout = atob(res.data.stdout)
+                        state.expectedOutput = atob(res.data.expectedOutput)
+                    })
+                    .catch((error) => {
+                        console.error(error.data);
+                        isButtonDisabled.value = false;
+                    });
+            }
+            catch (error) {
+                if (error.message.split(' (')[0] == 'Missing Refresh Token')
+                    alert("Log in, in order to submit code")
+            }
+
+
         }
 
         const handleDropdownItemClick = (language) => {
@@ -128,6 +147,7 @@ export default {
             getModeId,
             submitCode,
             handleDropdownItemClick,
+            isAuthenticated,
         }
     },
 };
