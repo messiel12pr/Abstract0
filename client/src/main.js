@@ -6,7 +6,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+const app = createApp(App);
 
 app
   .use(router)
@@ -16,10 +16,10 @@ app
       clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
       authorizationParams: {
         redirect_uri: import.meta.env.VITE_AUTH0_CALLBACK_URL,
-        audience: import.meta.env.API_IDENTIFIER,
+        audience: import.meta.env.VITE_AUTH0_API_IDENTIFIER,
       },
-      useRefreshTokens: 'true',
+      useRefreshTokens: true,
       cacheLocation: 'localstorage',
     })
   )
-app.mount('#app')
+app.mount('#app');

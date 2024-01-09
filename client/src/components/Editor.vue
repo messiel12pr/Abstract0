@@ -76,7 +76,7 @@ export default {
 
             if (!isAuthenticated.value) {
                 isButtonDisabled.value = true;
-                alert("Log in, in order to submit code")
+                alert("Log in, in order to submit code");
             }
 
             else
@@ -104,28 +104,35 @@ export default {
         }
 
         const submitCode = async () => {
-            isButtonDisabled.value = true;
-            const path = 'http://localhost:5001/submit';
-            const mode = getModeId();
+            try {
+                const token = await getAccessTokenSilently();
+                isButtonDisabled.value = true;
+                const path = 'http://localhost:5001/submit';
+                const mode = getModeId();
 
-            const requestData = {
-                language: mode,
-                code: state.user_input,
-            };
+                const requestData = {
+                    language: mode,
+                    code: state.user_input,
+                };
 
-            const token = await getAccessTokenSilently();
+                axios.post(path, requestData, { headers: { 'authorization': 'Bearer ' + token } })
+                    .then((res) => {
+                        state.submission = true;
+                        state.submissionResult = res.data.status.description
+                        state.stdout = atob(res.data.stdout)
+                        state.expectedOutput = atob(res.data.expectedOutput)
+                    })
+                    .catch((error) => {
+                        console.error(error.data);
+                        isButtonDisabled.value = false;
+                    });
+            }
+            catch (error) {
+                if (error.message.split(' (')[0] == 'Missing Refresh Token')
+                    alert("Log in, in order to submit code")
+            }
 
-            axios.post(path, requestData, { headers: { Authorization: 'Bearer ' + token } })
-                .then((res) => {
-                    state.submission = true;
-                    state.submissionResult = res.data.status.description
-                    state.stdout = atob(res.data.stdout)
-                    state.expectedOutput = atob(res.data.expectedOutput)
-                })
-                .catch((error) => {
-                    console.error(error.data);
-                    isButtonDisabled.value = false;
-                });
+
         }
 
         const handleDropdownItemClick = (language) => {
