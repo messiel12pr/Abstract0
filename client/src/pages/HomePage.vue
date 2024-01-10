@@ -5,7 +5,7 @@
                 <img src="../assets/graph.png" alt="graph">
                 <div class="welcome">
                     <img src="../assets/logo.svg" alt="logo" class="logo">
-                    <h2 style="display: inline-block;">ABSTRACT0</h2>
+                    <h2>ABSTRACT0</h2>
                     <p>Welcome to Abstract0, a dynamic learning platform with a primary focus on Data Structures and
                         Algorithms.</p>
                     <p>Our dedicated mission is to empower students to excel in their tests and coding interviews!</p>
@@ -115,6 +115,10 @@ main .card {
     padding: 10px 20px;
     border-radius: 6px;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
+}
+
+main .card h3 {
+    text-align: center;
 }
 
 a {
