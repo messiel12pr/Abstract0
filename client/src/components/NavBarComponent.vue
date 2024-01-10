@@ -1,14 +1,14 @@
 <template>
     <div id="container">
         <header>
-            <a class="logo" href="/">
+            <a class="logo" href="/home">
                 <!-- Add inline styles to the img tag to adjust the size -->
                 <img src="../assets/logo.svg" alt="logo" style="width: 50px; height: 50px;">
             </a>
 
             <nav>
                 <ul class="nav__links">
-                    <li><a href="#">Roadmap</a></li>
+                    <li><a href="/editor">Editor</a></li>
                     <li><a href="#">Problems</a></li>
                     <li><a href="#">Resources</a></li>
                 </ul>
