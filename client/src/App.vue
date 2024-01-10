@@ -1,5 +1,4 @@
 <template>
-  <NavBarComponent />
   <RouterView />
 </template>
 
@@ -8,11 +7,4 @@ import { RouterView } from 'vue-router'
 </script>
 
 <script>
-import NavBarComponent from './components/NavBarComponent.vue';
-
-export default {
-  components: {
-    NavBarComponent,
-  },
-};
 </script>
