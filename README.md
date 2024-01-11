@@ -21,13 +21,13 @@
 ### Preview:
 
 ###### Home Page:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/ca92de33-027e-4cc2-839f-af7a843bd655)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/5b48a3db-0857-4597-b9de-bd0a3ec498c5)
 
 ###### Editor:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/ff5bb105-0dbb-4c7e-83a4-a46adafe687f)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/2801c019-1ffa-495f-9d7f-b5045bb736d2)
 
 ###### Log In:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/c0b3aa76-3f7b-4284-a2a9-f33612df5de0)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/4ce4db3f-7a17-4a45-8819-ad3faafdb1b3)
 
 ### Future plans 🚀:
 - [ ] Create an engine to validate user problem submission
