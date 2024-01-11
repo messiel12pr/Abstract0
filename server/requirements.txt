@@ -4,3 +4,5 @@ python-jose
 flask-cors
 six
 Authlib
+sqlalchemy
+pymysql

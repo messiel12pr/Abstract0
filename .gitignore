@@ -3,3 +3,4 @@ editor.html
 launch_dev_env.sh
 *.env
 __pycache__/
+DB_SCHEMA.sql
