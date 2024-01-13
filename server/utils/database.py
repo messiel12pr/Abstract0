@@ -19,23 +19,12 @@ class Database:
             }
         })
 
-    def create_user(self, user_id: int, name: str, submission_details_id: int):
+    def create_user(self, user_id: int, name: str):
         try:
             with self.engine.connect() as conn:
-                query = text("INSERT INTO user (user_id, user_name, submission_details_id) \
-                                   VALUES (:user_id, :user_name, :submission_details_id)")
-                params = {"user_id": user_id, "user_name": name, "submission_details_id": submission_details_id}
-                conn.execute(query, params)
-
-        except Exception as e:  
-            print(e.__str__())
-
-    def set_user_submission_details_id(self, user_id: int, submission_details_id: int):
-        try:
-            with self.engine.connect() as conn:
-                query = text("UPDATE user SET submission_details_id = (:submission_details_id) \
-                               WHERE user_id = (:user_id)")
-                params = {"submission_details_id": submission_details_id, "user_id": user_id}
+                query = text("INSERT INTO user (user_id, user_name) \
+                                   VALUES (:user_id, :user_name)")
+                params = {"user_id": user_id, "user_name": name,}
                 conn.execute(query, params)
 
         except Exception as e:  
@@ -46,12 +35,12 @@ class Database:
             with self.engine.connect() as conn:
                 query = text("SELECT * FROM user WHERE user_id = (:user_id)")
                 params = {"user_id": user_id}
-                return conn.execute(query, params)
+                return conn.execute(query, params).all()
 
         except Exception as e:  
             print(e.__str__())
 
-    def create_submission_details(self, problem_id: int, result: str, last_submission_date: str, time_taken: str, user_id: str):
+    def create_submission_details(self, problem_id: int, result: str, last_submission_date: str, time_taken: str, user_id: int):
         try:
             with self.engine.connect() as conn:
                 query = text("INSERT INTO submission_details (problem_id, result, last_submission_date, time_taken_minutes, user_id) \
@@ -67,17 +56,59 @@ class Database:
             with self.engine.connect() as conn:
                 query = text("SELECT * FROM submission_details WHERE user_id = (:user_id)")
                 params = {"user_id": user_id,}
-                return conn.execute(query, params)
+                return conn.execute(query, params).all()
 
         except Exception as e:  
             print(e.__str__())
-    
+
     def get_submission_details_id(self, user_id: int):
         try:
             with self.engine.connect() as conn:
                 query = text("SELECT submission_details_id FROM submission_details WHERE user_id = (:user_id)")
                 params = {"user_id": user_id,}
-                return conn.execute(query, params)
+                return conn.execute(query, params).all()
+
+        except Exception as e:  
+            print(e.__str__())
+
+    def create_problem_category(self, title: str, author: str, creation_date: str):
+        try:
+            with self.engine.connect() as conn:
+                query = text("INSERT INTO problem_category (problem_category_title, author, creation_date) \
+                                   VALUES (:problem_category_title, :author, :creation_date)")
+                params = {"problem_category_title": title, "author": author, "creation_date": creation_date}
+                conn.execute(query, params)
+
+        except Exception as e:  
+            print(e.__str__())
+
+    def get_problem_category_id(self, title, author):
+        try:
+            with self.engine.connect() as conn:
+                query = text("SELECT problem_category_id FROM problem_category WHERE problem_category_title = (:title) AND author = (:author)")
+                params = {"title": title, "author": author}
+                return conn.execute(query, params).all()
+
+        except Exception as e:  
+            print(e.__str__())
+
+    def create_problem(self, problem_category_id: int, title: str, location: str, difficulty: str, hint: str):
+        try:
+            with self.engine.connect() as conn:
+                query = text("INSERT INTO problem (problem_category_id, problem_title, problem_location, problem_difficulty, hint) \
+                                   VALUES (:problem_category_id, :problem_title, :problem_location, :problem_difficulty, :hint)")
+                params = {"problem_category_id": problem_category_id, "problem_title": title, "problem_location": location, "problem_difficulty": difficulty, "hint": hint}
+                conn.execute(query, params)
+
+        except Exception as e:  
+            print(e.__str__())
+
+    def get_problem_id(self, problem_category_id: int, problem_title: str):
+        try:
+            with self.engine.connect() as conn:
+                query = text("SELECT problem_id FROM problem WHERE problem_category_id = (:problem_category_id) AND problem_title = (:problem_title)")
+                params = {"problem_category_id": problem_category_id, "problem_title": problem_title}
+                return conn.execute(query, params).all()
 
         except Exception as e:  
             print(e.__str__())
