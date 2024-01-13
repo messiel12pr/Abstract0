@@ -6,3 +6,4 @@ six
 Authlib
 sqlalchemy
 pymysql
+pytest
