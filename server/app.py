@@ -1,12 +1,12 @@
-from os import environ as env
-
-from dotenv import load_dotenv, find_dotenv
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import server.utils.judge0_utils as j0_utils
 from authlib.integrations.flask_oauth2 import ResourceProtector
 from server.utils.validator import Auth0JWTBearerTokenValidator
+from server.utils.database import Database
 import time
+
+db = Database()
 
 require_auth = ResourceProtector()
 validator = Auth0JWTBearerTokenValidator(
