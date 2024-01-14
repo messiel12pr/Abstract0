@@ -103,6 +103,16 @@ class Database:
         except Exception as e:  
             print(e.__str__())
 
+    def get_problem(self, problem_id: int):
+        try:
+            with self.engine.connect() as conn:
+                query = text("SELECT * FROM problem WHERE problem_id = (:problem_id)")
+                params = {"problem_id": problem_id}
+                return conn.execute(query, params).all()
+
+        except Exception as e:  
+            print(e.__str__()) 
+
     def get_problem_id(self, problem_category_id: int, problem_title: str):
         try:
             with self.engine.connect() as conn:

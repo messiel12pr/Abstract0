@@ -11,7 +11,7 @@ def test_problem_category_creation():
 
 def test_problem_creation():
     db.create_problem(1, "Append node to list", "/problems/linked_list", "Easy", "Use the tail of the linked list")
-    assert db.get_problem_id(1, "Append node to list") == [(1, )]
+    assert db.get_problem(1) == [(1, 1, "Append node to list", "/problems/linked_list", "Easy", "Use the tail of the linked list")]
 
 def test_user_creation():
     db.create_user(12345, 'test_user')
