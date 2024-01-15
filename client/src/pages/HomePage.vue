@@ -18,7 +18,7 @@
                     <p>Run your code effortlessly without the hassle of setting up a coding environment!</p>
                 </div>
                 <div class="card">
-                    <h3><a href="#">Coding Problems</a></h3>
+                    <h3><a href="/problems">Coding Problems</a></h3>
                     <p>Solidify your understanding through interactive hands-on practice sessions.</p>
                     <p>Challenging problems await, designed to enhance your problem-solving skills and reinforce key
                         concepts.</p>
