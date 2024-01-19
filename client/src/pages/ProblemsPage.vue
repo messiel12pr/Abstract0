@@ -1,6 +1,6 @@
 <template>
     <NavBarComponent />
-
+    <!-- 
     <main class="grid">
         <div class="container mx-auto mt-4">
             <div class="row">
@@ -75,6 +75,7 @@
             <ProblemSetComponent v-bind:problemSetData="data" />
         </div>
     </main>
+    -->
 </template>
   
 <script>
