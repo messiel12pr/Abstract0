@@ -1,19 +1,26 @@
 <template>
-    <NavBarComponent />
-    <Editor />
-    <ProblemDescriptionComponent />
+    <div>
+        <NavBarComponent />
+        <div class="editor-container">
+            <Editor />
+        </div>
+    </div>
 </template>
   
 <script>
 import Editor from '../components/Editor.vue';
-import ProblemDescriptionComponent from '../components/ProblemDescriptionComponent.vue';
 import NavBarComponent from '../components/NavBarComponent.vue';
 
 export default {
     components: {
         Editor,
-        ProblemDescriptionComponent,
         NavBarComponent,
     },
 };
 </script>
+
+<style>
+.editor-container {
+    margin-top: 20px;
+}
+</style>

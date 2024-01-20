@@ -40,10 +40,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
+    padding: 10px 5%;
     background-color: #282c34;
-    /*width: 95%;
-    margin: 0 auto;*/
+    border-radius: 0.5em;
 }
 
 .nav__links a {

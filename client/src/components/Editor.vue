@@ -1,8 +1,26 @@
 <template>
-    <div>
+    <div class="grid-container">
         <pre id="editor"></pre>
-        <button type="button" :disabled="isButtonDisabled" @click="submitCode()" id="submitButton"
+
+        <ProblemDescriptionComponent class="problem-description" />
+
+        <div id="submission-container">
+            <h4>Submission Details</h4>
+            <div id="submission-details" v-if="state.submission">
+                <ul>
+                    <li>Result: {{ state.submissionResult }}</li>
+                    <li>Standard Output: {{ state.stdout }}</li>
+                    <li>Expected Output: {{ state.expectedOutput }}</li>
+                </ul>
+            </div>
+            <div v-else>Hang in there, code is on its way...</div>
+        </div>
+
+        <button type="button" :disabled="isButtonDisabled" @click="submitCode()" id="submit-button"
             class="btn btn-submit btn-lg">Submit</button>
+
+        <button type="button" @click="downloadContent" id="download-button" class="btn btn-submit btn-lg">Download</button>
+
         <div id="dropdown-container" class="dropup">
             <button id="language-dropdown" class="btn btn-custom dropdown-toggle btn-lg" type="button"
                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -14,17 +32,6 @@
                 <li><a class="dropdown-item" href="#" @click="handleDropdownItemClick('ace/mode/java')">Java</a>
                 </li>
             </ul>
-        </div>
-        <div id="submission-container">
-            <h4>Submission Details</h4>
-            <div id="submission-details" v-if="state.submission">
-                <ul>
-                    <li>Result: {{ state.submissionResult }}</li>
-                    <li>Standard Output: {{ state.stdout }}</li>
-                    <li>Expected Output: {{ state.expectedOutput }}</li>
-                </ul>
-            </div>
-            <div v-else>Hang in there, code is on its way...</div>
         </div>
     </div>
 </template>
@@ -38,7 +45,7 @@ import '../../ace-builds/src-noconflict/mode-java';
 import axios from 'axios';
 import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue';
 import { useAuth0 } from '@auth0/auth0-vue';
-
+import ProblemDescriptionComponent from '../components/ProblemDescriptionComponent.vue';
 export default {
     setup() {
         const { isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -140,6 +147,18 @@ export default {
             editor.instance.session.setMode(language);
         }
 
+        const downloadContent = () => {
+            const content = state.user_input;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'code.txt';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         return {
             state,
             editor,
@@ -148,81 +167,90 @@ export default {
             submitCode,
             handleDropdownItemClick,
             isAuthenticated,
+            downloadContent,
         }
     },
+    components: {
+        ProblemDescriptionComponent,
+    }
 };
 </script>
 
 <style scoped>
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 10px;
+}
+
 #editor {
-    width: 65%;
-    height: 88%;
-    margin: 0.9%;
-    position: absolute;
-    top: 9%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1% 3%;
-    border-radius: 1.5%;
+    border-radius: 0.5em;
+    grid-column: 1/9;
+    grid-row-start: 1;
+    grid-row-end: 6;
 }
 
-#submitButton {
-    position: absolute;
-    top: 91.5%;
-    margin: 0%;
-    left: 67%;
-    z-index: 1%;
-    color: #282A36;
-    border-color: black;
-    background-color: #F1FA8C;
-    font-size: 1vw;
-    width: 10vw;
-    height: 7vh;
-}
-
-#dropdown-container {
-    position: absolute;
-    top: 91.5%;
-    margin: 0%;
-    left: 78%;
-    z-index: 1%;
-}
-
-.btn-custom {
-    color: #282A36;
-    border-color: black;
-    background-color: #F1FA8C;
-    font-size: 1vw;
-    width: 21vw;
-    height: 7vh;
-}
-
-.dropdown-item {
-    color: #282A36;
-    width: 21vw;
-    font-size: 1rem;
-}
-
-.dropdown-menu {
-    background-color: #e4e6eb;
+.problem-description {
+    grid-column: 9/24;
+    height: 600px;
 }
 
 #submission-container {
+    height: 160px;
     overflow: hidden;
     background-color: #e4e6eb;
-    width: 32%;
-    height: 15%;
-    position: absolute;
-    top: 74.5%;
-    margin: 0 auto;
-    left: 67%;
     border-radius: 0.5em;
     text-align: center;
     padding: 1%;
+    grid-column: 9/24;
 }
 
 #submission-details {
     text-align: left;
+}
+
+#submit-button {
+    color: #282A36;
+    border-color: black;
+    background-color: #F1FA8C;
+    font-size: 1vw;
+    width: 100%;
+    height: 100%;
+    line-height: 3;
+    grid-column: 9/10;
+}
+
+#download-button {
+    color: #282A36;
+    border-color: black;
+    background-color: #F1FA8C;
+    font-size: 1vw;
+    width: 100%;
+    height: 100%;
+    line-height: 3;
+    grid-column: 10/11;
+}
+
+#dropdown-container {
+    grid-column: 11/24;
+}
+
+.btn-custom {
+    width: 100%;
+    height: 100%;
+    color: #282A36;
+    border-color: black;
+    background-color: #F1FA8C;
+    font-size: 1vw;
+}
+
+.dropdown-item {
+    color: #282A36;
+    font-size: 1vw;
+}
+
+.dropdown-menu {
+    background-color: #e4e6eb;
+    width: 100%;
 }
 </style>
