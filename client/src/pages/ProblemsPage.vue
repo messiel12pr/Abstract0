@@ -9,9 +9,7 @@
 
         <div class="cards">
             <div @click="activateComponent(dsProblemSetData)" class="card">
-                <img class="card__image"
-                    src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                    alt="">
+                <img class="card__image" src="../assets/images/Binary_tree.png" alt="">
                 <div class="card__content">
                     <div class="card-body">
                         <h5 class="card-title">Data Structures and Algorithms</h5>
@@ -22,9 +20,7 @@
             </div>
 
             <div @click="activateComponent(dsProblemSetData)" class="card">
-                <img class="card__image"
-                    src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                    alt="">
+                <img class="card__image" src="../assets/images/OOP.png" alt="">
                 <div class="card__content">
                     <div class="card-body">
                         <h5 class="card-title">Object Oriented Programming</h5>
@@ -35,9 +31,7 @@
             </div>
 
             <div @click="activateComponent(dsProblemSetData)" class="card">
-                <img class="card__image"
-                    src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                    alt="">
+                <img class="card__image" src="../assets/images/Sorting.png" alt="">
                 <div class="card__content">
                     <div class="card-body">
                         <h5 class="card-title">Algorithms</h5>
@@ -115,7 +109,9 @@ body {
 }
 
 .problem-selection-container {
-    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
     z-index: 1;
 }
 
@@ -143,8 +139,8 @@ body {
     cursor: pointer;
     transform: scale(1.08);
     transition: .5s;
-    box-shadow: 41px 41px 82px #0e0e0e,
-        -41px -41px 82px #222222;
+    box-shadow: 18px 18px 50px #131313,
+        -18px -18px 50px #1d1d1d;
 }
 
 .card__content,
@@ -161,7 +157,7 @@ body {
 }
 
 .card__image {
-    height: 400px;
+    height: 450px;
     object-fit: fill;
 }
 
