@@ -2,12 +2,12 @@
     <body>
         <NavBarComponent />
 
-        <div class="problem-selection-container" v-if="isActivated">
-            <button @click="deactivateComponent()" type="button" class="btn-close" aria-label="Close"></button>
-            <ProblemSetComponent v-bind:problemSetData="data" />
-        </div>
-
         <div class="cards">
+            <div class="problem-selection-container" v-if="isActivated">
+                <button @click="deactivateComponent()" type="button" class="btn-close" aria-label="Close"></button>
+                <ProblemSetComponent v-bind:problemSetData="data" />
+            </div>
+
             <div @click="activateComponent(dsProblemSetData)" class="card">
                 <img class="card__image" src="../assets/images/Binary_tree.png" alt="">
                 <div class="card__content">
@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div @click="activateComponent(dsProblemSetData)" class="card">
+            <div @click="activateComponent(oopProblemSetData)" class="card">
                 <img class="card__image" src="../assets/images/OOP.png" alt="">
                 <div class="card__content">
                     <div class="card-body">
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div @click="activateComponent(dsProblemSetData)" class="card">
+            <div @click="activateComponent(algProblemSetData)" class="card">
                 <img class="card__image" src="../assets/images/Sorting.png" alt="">
                 <div class="card__content">
                     <div class="card-body">
@@ -71,10 +71,26 @@ export default {
         };
 
         const dsProblemSetData = [
-            ["Li, reactive, watch, onMounted, onBeforeUnmountst", listHm],
+            ["Linked List", listHm],
             ["Stack", stackHm],
             ["Queue", queueHm],
         ];
+
+        const comingSoonOOP = {
+            "Coming Soon!": "0"
+        }
+
+        const oopProblemSetData = [
+            ["Object Oriented Programming", comingSoonOOP]
+        ]
+
+        const comingSoonALG = {
+            "Coming Soon!": "0"
+        }
+
+        const algProblemSetData = [
+            ["Algorithms", comingSoonALG]
+        ]
 
         const activateComponent = (problemSet) => {
             data.value = problemSet;
@@ -90,6 +106,8 @@ export default {
             isActivated,
             data,
             dsProblemSetData,
+            oopProblemSetData,
+            algProblemSetData,
             activateComponent,
             deactivateComponent,
         };
@@ -110,13 +128,16 @@ body {
 
 .problem-selection-container {
     position: absolute;
-    top: 50%;
-    bottom: 50%;
     z-index: 1;
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 16%;
+    bottom: 0;
 }
 
 .cards {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-auto-rows: auto;
     gap: 20px;
@@ -161,13 +182,11 @@ body {
     object-fit: fill;
 }
 
-.btn {
-    color: #282a36;
-    background-color: #f1fa8c;
-    width: 100%;
-}
-
 .btn-close {
-    background-color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 20px;
+    width: 30px;
 }
 </style>
