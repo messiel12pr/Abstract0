@@ -1,81 +1,54 @@
 <template>
-    <NavBarComponent />
-    <!-- 
-    <main class="grid">
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" style="width: 25rem">
-                        <img src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                            class="card-img-top" width="300" height="400" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">Data Structures and Algorithms</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
-                            <p class="card-text">Learn the basics of Data Structures</p>
-                            <a @click="activateComponent(dsProblemSetData)" class="btn mr-2">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" style="width: 25rem">
-                        <img src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                            class="card-img-top" width="300" height="400" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
-                            <p class="card-text">Netus et malesuada fames ac turpis</p>
-                            <a @click="activateComponent(dsProblemSetData)" class="btn mr-2">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" style="width: 25rem">
-                        <img src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                            class="card-img-top" width="300" height="400" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
-                            <p class="card-text">Netus et malesuada fames ac turpis</p>
-                            <a @click="activateComponent(dsProblemSetData)" class="btn mr-2">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container mx-auto mt-4">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card" style="width: 25rem">
-                        <img src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
-                            class="card-img-top" width="300" height="400" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
-                            <p class="card-text">Netus et malesuada fames ac turpis</p>
-                            <a @click="activateComponent(dsProblemSetData)" class="btn mr-2">Start</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <body>
+        <NavBarComponent />
 
         <div class="problem-selection-container" v-if="isActivated">
             <button @click="deactivateComponent()" type="button" class="btn-close" aria-label="Close"></button>
             <ProblemSetComponent v-bind:problemSetData="data" />
         </div>
-    </main>
-    -->
+
+        <div class="cards">
+            <div @click="activateComponent(dsProblemSetData)" class="card">
+                <img class="card__image"
+                    src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
+                    alt="">
+                <div class="card__content">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Structures and Algorithms</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
+                        <p class="card-text">Learn basic Data Structures</p>
+                    </div>
+                </div>
+            </div>
+
+            <div @click="activateComponent(dsProblemSetData)" class="card">
+                <img class="card__image"
+                    src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
+                    alt="">
+                <div class="card__content">
+                    <div class="card-body">
+                        <h5 class="card-title">Object Oriented Programming</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
+                        <p class="card-text">Learn the basics of OOP</p>
+                    </div>
+                </div>
+            </div>
+
+            <div @click="activateComponent(dsProblemSetData)" class="card">
+                <img class="card__image"
+                    src="https://oklahoma-cannabis-company.com/wp-content/uploads/2021/07/Coming-Soon-Photo-2048x2048.jpeg"
+                    alt="">
+                <div class="card__content">
+                    <div class="card-body">
+                        <h5 class="card-title">Algorithms</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Beginner</h6>
+                        <p class="card-text">Learn basic Algorithms</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
 </template>
   
 <script>
@@ -135,47 +108,70 @@ export default {
 </script>
   
 <style scoped>
-.grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-main {
-    position: absolute;
-    top: 9%;
-    left: 0.2%;
-}
-
-.container {
-    grid-column: span 3;
+body {
+    font-family: "Arial", sans-serif;
+    line-height: 1.6;
+    margin: 20px;
 }
 
 .problem-selection-container {
-    background-color: #e4e6eb;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 2%;
-    border-radius: 1.5%;
-    overflow-y: scroll;
-    grid-column: span 12;
+    margin: 0 auto;
+    z-index: 1;
 }
 
-.btn-close {
-    background-color: red;
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-auto-rows: auto;
+    gap: 20px;
+    font-family: sans-serif;
+    padding-top: 100px;
+}
+
+.cards * {
+    box-sizing: border-box;
 }
 
 .card {
-    background: #282c34;
+    background-color: #282c34;
+    width: max-content;
+    margin: 0 auto;
+    transition: 1s;
+}
+
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.08);
+    transition: .5s;
+    box-shadow: 41px 41px 82px #0e0e0e,
+        -41px -41px 82px #222222;
+}
+
+.card__content,
+.card__info,
+.card-body {
+    background-color: #282c34;
     color: #edf0f1;
+    padding: 15px;
+}
+
+.card__info {
+    margin: 0 auto;
+    width: 30%;
+}
+
+.card__image {
+    height: 400px;
+    object-fit: fill;
 }
 
 .btn {
     color: #282a36;
     background-color: #f1fa8c;
-    width: 25%;
+    width: 100%;
+}
+
+.btn-close {
+    background-color: red;
 }
 </style>

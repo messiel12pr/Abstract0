@@ -19,8 +19,6 @@ export default {
 }
 
 .problem-set-container {
-    margin: 0 auto;
-    position: absolute;
     background-color: #282c34;
     color: #e4e6eb;
     z-index: 1;
