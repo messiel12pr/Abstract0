@@ -55,6 +55,7 @@ header {
 .nav__links {
     list-style: none;
     display: flex;
+    margin-left: 18%;
 }
 
 .nav__links li {
@@ -72,11 +73,11 @@ header {
 
 .buttons {
     display: flex;
-    gap: 3rem;
+    gap: 1.5rem;
     box-sizing: border-box;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1300px) {
 
     .nav__links {
         display: none;
