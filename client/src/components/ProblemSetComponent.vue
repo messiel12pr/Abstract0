@@ -6,7 +6,9 @@
                     <h3>{{ i[0] }}</h3>
                     <ul>
                         <li v-for="(value, key) in i[1]">
-                            <div class="problem">{{ key }}</div>
+                            <a :href="`/problems/${value}`">
+                                <div class="problem">{{ key }}</div>
+                            </a>
                         </li>
                     </ul>
                     <br>
@@ -45,6 +47,16 @@ ol {
     margin: 0;
 }
 
+a {
+    outline: none;
+    text-decoration: none;
+    color: #282c34;
+}
+
+a:hover {
+    color: #e4e6eb;
+}
+
 h3 {
     line-height: 2;
     border-bottom: 1px solid #282c34;
@@ -65,7 +77,6 @@ h3 {
 
 .problem:hover {
     background-color: #282c34;
-    color: #e4e6eb;
     transition: .5s;
     cursor: pointer;
 }
