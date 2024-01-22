@@ -169,8 +169,7 @@ body {
     cursor: pointer;
     transform: scale(1.08);
     transition: .5s;
-    box-shadow: 18px 18px 50px #131313,
-        -18px -18px 50px #1d1d1d;
+    box-shadow: 6px 6px 21px #131313, -6px -6px 21px #1d1d1d;
 }
 
 .card__content,
