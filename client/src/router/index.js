@@ -29,6 +29,12 @@ const router = createRouter({
       component: Problems
     },
     {
+      path: '/problems/:id',
+      name: 'problem',
+      component: Editor,
+      props: true
+    },
+    {
       path: '/submit',
       name: 'submit',
       component: EditorComponent
