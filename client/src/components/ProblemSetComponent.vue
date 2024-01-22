@@ -1,6 +1,10 @@
 <template>
     <main>
         <div class="problem-set-container">
+            <div class="title">
+                <div>Problem Selection</div>
+                <hr>
+            </div>
             <ul>
                 <li v-for="(i) in problemSetData">
                     <h3>{{ i[0] }}</h3>
@@ -34,14 +38,30 @@ export default {
     padding: 0;
 }
 
+
+.problem-set-container>ul {
+    padding: 20px 180px;
+}
+
 .problem-set-container {
     background-color: #e4e6eb;
     color: #282c34;
-    padding: 20px 180px;
-    border-radius: 4px;
+    border-radius: 10px;
     width: 800px;
     height: 580px;
     overflow-y: scroll;
+}
+
+.title {
+    top: 0;
+    background-color: #e4e6eb;
+    position: sticky;
+    text-align: center;
+    color: #282c34;
+}
+
+.title>hr {
+    margin-top: 0px;
 }
 
 ul,
