@@ -25,7 +25,7 @@
 
 
 ###### Editor:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/d31da7f7-3ab3-4aec-8d41-78745f2fc9dd)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/0efa7f9c-4eab-4301-b2d6-e892d8cdfbf8)
 
 
 ###### Problems Page:
