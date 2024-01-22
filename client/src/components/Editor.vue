@@ -43,9 +43,10 @@ import '../../ace-builds/src-noconflict/mode-c_cpp';
 import '../../ace-builds/src-noconflict/mode-python';
 import '../../ace-builds/src-noconflict/mode-java';
 import axios from 'axios';
-import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue';
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
 import { useAuth0 } from '@auth0/auth0-vue';
 import ProblemDescriptionComponent from '../components/ProblemDescriptionComponent.vue';
+
 export default {
     setup() {
         const { isAuthenticated, getAccessTokenSilently } = useAuth0();
@@ -172,7 +173,7 @@ export default {
     },
     components: {
         ProblemDescriptionComponent,
-    }
+    },
 };
 </script>
 
