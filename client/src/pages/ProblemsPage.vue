@@ -95,12 +95,16 @@ export default {
         const activateComponent = (problemSet) => {
             data.value = problemSet;
             isActivated.value = true;
+            blurBackgroundpx.value = "4px"
         };
 
         const deactivateComponent = () => {
             data.value = null;
             isActivated.value = false;
+            blurBackgroundpx.value = "0px"
         };
+
+        const blurBackgroundpx = ref("0px");
 
         return {
             isActivated,
@@ -110,6 +114,7 @@ export default {
             algProblemSetData,
             activateComponent,
             deactivateComponent,
+            blurBackgroundpx,
         };
     },
     components: {
@@ -120,6 +125,10 @@ export default {
 </script>
   
 <style scoped>
+.card {
+    filter: blur(v-bind(blurBackgroundpx));
+}
+
 body {
     font-family: "Arial", sans-serif;
     line-height: 1.6;
@@ -184,7 +193,8 @@ body {
 
 .btn-close {
     position: absolute;
-    top: 0;
+    z-index: 1;
+    top: 2px;
     right: 0;
     height: 20px;
     width: 30px;
