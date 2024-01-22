@@ -1,23 +1,20 @@
 <template>
-    <div id="container">
-        <header>
-            <a class="logo" href="/home">
-                <!-- Add inline styles to the img tag to adjust the size -->
-                <img src="../assets/logo.svg" alt="logo" style="width: 50px; height: 50px;">
-            </a>
+    <header>
+        <a href="/home"><img src="../assets/logo.svg" alt="logo" style="width: 55px; height: 55px; margin-right: 2rem"></a>
 
-            <nav>
-                <ul class="nav__links">
-                    <li><a href="/editor">Editor</a></li>
-                    <li><a href="#">Problems</a></li>
-                    <li><a href="#">Resources</a></li>
-                </ul>
-            </nav>
-            <loginButton class="cta" />
-            <logoutButton class="cta" />
-            <p class="menu cta">Menu</p>
-        </header>
-    </div>
+        <nav>
+            <ul class="nav__links">
+                <li><a href="/editor">Editor</a></li>
+                <li><a href="/problems">Problems</a></li>
+                <li><a href="#">Resources</a></li>
+            </ul>
+        </nav>
+
+        <div class="buttons">
+            <loginButton />
+            <logoutButton />
+        </div>
+    </header>
 </template>
   
 <script>
@@ -33,21 +30,6 @@ export default {
 </script>
   
 <style scoped>
-#container {
-    position: absolute;
-    width: 98%;
-    height: 10%;
-    top: 2%;
-    right: 1%;
-    bottom: 0%;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-a {
-    background-color: transparent
-}
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -56,23 +38,16 @@ a {
 
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 0.5%;
+    padding: 10px 5%;
     background-color: #282c34;
-    border-radius: 10px;
+    border-radius: 0.5em;
 }
 
-.logo {
-    cursor: pointer;
-}
-
-.nav__links a,
-.cta,
-.overlay__content a {
-    font-family: sans-serif;
+.nav__links a {
+    font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    font-size: 1.2em;
     color: #edf0f1;
     text-decoration: none;
 }
@@ -80,6 +55,7 @@ header {
 .nav__links {
     list-style: none;
     display: flex;
+    margin-left: 18%;
 }
 
 .nav__links li {
@@ -88,29 +64,23 @@ header {
 
 .nav__links li a {
     transition: color 0.3s ease 0s;
+    font-size: larger;
 }
 
 .nav__links li a:hover {
     color: #f1fa8c;
 }
 
-.cta {
-    color: #282A36;
-    padding: 9px 25px;
-    background-color: #f1fa8c;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease 0s;
+.buttons {
+    display: flex;
+    gap: 1.5rem;
+    box-sizing: border-box;
 }
 
-/*
-.cta:hover {
-    background-color: #f1fa8c;
-}
-*/
+@media only screen and (max-width: 1300px) {
 
-.menu {
-    display: none;
+    .nav__links {
+        display: none;
+    }
 }
 </style>

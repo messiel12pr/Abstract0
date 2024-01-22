@@ -6,14 +6,20 @@
 </template>
   
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
+import { useRoute } from "vue-router";
+import axios from 'axios';
 
 export default {
     setup() {
         const htmlContent = ref();
+        const problemLocation = ref();
+        const route = useRoute();
 
-        onMounted(() => {
-            fetch('../problem_description.html')
+        onMounted(async () => {
+            await getProblemDescriptionLocation();
+
+            fetch(problemLocation.value)
                 .then(response => response.text())
                 .then(html => {
                     htmlContent.value = html;
@@ -23,10 +29,29 @@ export default {
                 });
         });
 
+        const getProblemDescriptionLocation = async () => {
+            try {
+                const path = 'http://localhost:5001/problems/' + route.params.id;
+
+                await axios.get(path)
+                    .then((res) => {
+                        problemLocation.value = res["data"];
+                    })
+                    .catch((error) => {
+                        console.error(error.data);
+                    });
+            }
+            catch (error) {
+                console.log(error.message)
+            }
+        }
+
         return {
             htmlContent,
+            problemLocation,
         }
-    }
+    },
+
 };
 </script>
   
@@ -34,20 +59,11 @@ export default {
 #container {
     overflow: hidden;
     background-color: #e4e6eb;
-    width: 32%;
-    height: 61%;
-    margin: 1%;
-    position: absolute;
-    top: 9%;
-    bottom: 0;
-    left: 66%;
-    border-radius: 1.5%;
+    border-radius: 0.5em;
     overflow-y: scroll;
 }
 
 #description {
     margin: 6%;
-    width: 90%;
-    height: 90%;
 }
 </style>

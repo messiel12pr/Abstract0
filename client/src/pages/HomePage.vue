@@ -4,8 +4,7 @@
             <main class="grid">
                 <img src="../assets/graph.png" alt="graph">
                 <div class="welcome">
-                    <img src="../assets/logo.svg" alt="logo" class="logo">
-                    <h2>ABSTRACT0</h2>
+                    <h2><img src="../assets/logo.svg" alt="logo" class="logo">ABSTRACT0</h2>
                     <p>Welcome to Abstract0, a dynamic learning platform with a primary focus on Data Structures and
                         Algorithms.</p>
                     <p>Our dedicated mission is to empower students to excel in their tests and coding interviews!</p>
@@ -18,7 +17,7 @@
                     <p>Run your code effortlessly without the hassle of setting up a coding environment!</p>
                 </div>
                 <div class="card">
-                    <h3><a href="#">Coding Problems</a></h3>
+                    <h3><a href="/problems">Coding Problems</a></h3>
                     <p>Solidify your understanding through interactive hands-on practice sessions.</p>
                     <p>Challenging problems await, designed to enhance your problem-solving skills and reinforce key
                         concepts.</p>
@@ -49,19 +48,13 @@ body {
 
 .logo {
     max-height: 37px;
-    float: right;
-    left: 29%;
     position: absolute;
+    margin-left: 35px;
 }
 
 .container {
-    margin: 0;
     font-family: "Poppins";
-    position: absolute;
-    margin: 0.9%;
-    top: -3%;
-    bottom: 0;
-    left: 20%;
+    margin: 0 auto;
     padding: 1% 3%;
     border-radius: 0.5em;
 }
@@ -95,6 +88,8 @@ main .welcome {
 
 main .welcome h2 {
     color: #F1FA8C;
+    width: 350px;
+    position: relative;
 }
 
 .grid h2 {

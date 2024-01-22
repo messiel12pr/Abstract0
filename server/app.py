@@ -22,21 +22,16 @@ app.config.from_object(__name__)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-@app.route("/api/public")
-def public():
-    """No access token required."""
-    response = (
-        "Hello from a public endpoint! You don't need to be"
-        " authenticated to see this."
-    )
-    return jsonify(message=response)
+@app.route("/problems/<int:id>", methods=['GET'])
+def get_problem_location(id):
+    response = db.get_problem(id)
+    print(response)
+    return jsonify(response[0][3])
 
 
 @app.route("/submit", methods=['POST'])
 @require_auth(None)
 def submit():
-    """A valid access token is required."""
-
     try:
         data = request.get_json()
         submission_token = j0_utils.post_submission(j0_utils.get_language_id(data["language"]), data["code"], "", "")

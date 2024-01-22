@@ -1,5 +1,5 @@
 <template>
-    <button class="button__login" @click="handleLogout">Log Out</button>
+    <button @click="handleLogout">Log Out</button>
 </template>
   
 <script setup>
@@ -16,4 +16,19 @@ const handleLogout = () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    padding: 9px 25px;
+    background-color: #f1fa8c;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease 0s;
+    font-size: larger;
+}
+</style>

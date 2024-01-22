@@ -1,5 +1,5 @@
 <template>
-    <button class="button__login" @click="handleLogin">Log In</button>
+    <button @click="handleLogin">Log In</button>
 </template>
   
 <script setup>
@@ -17,8 +17,18 @@ const handleLogin = () => {
 </script>
 
 <style scoped>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 button {
-    margin-left: 60%;
-    margin-right: 1.5%;
+    padding: 9px 25px;
+    background-color: #f1fa8c;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease 0s;
+    font-size: larger;
 }
 </style>
