@@ -21,10 +21,16 @@
 ### Preview:
 
 ###### Home Page:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/5b48a3db-0857-4597-b9de-bd0a3ec498c5)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/069db12b-1958-4f8f-b3e8-4c2486ab205c)
+
 
 ###### Editor:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/2801c019-1ffa-495f-9d7f-b5045bb736d2)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/d31da7f7-3ab3-4aec-8d41-78745f2fc9dd)
+
+
+###### Problems Page:
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/cc4cd21c-d9e8-4d0c-9e8a-25b0e296d2a5)
+
 
 ###### Log In:
 ![image](https://github.com/messiel12pr/Abstract0/assets/95717805/4ce4db3f-7a17-4a45-8819-ad3faafdb1b3)
@@ -37,7 +43,7 @@
     - Problems solved
     - Time per problem
     - Average time per problem
-- [ ] Make frontend more responsive  
+- [x] Make frontend more responsive  
 - [ ] Deploy to production
 
 ### License:
