@@ -44,8 +44,8 @@ export default {
 }
 
 .problem-set-container {
-    background-color: #e4e6eb;
-    color: #282c34;
+    background-color: #282c34;
+    color: #e4e6eb;
     border-radius: 10px;
     width: 800px;
     height: 580px;
@@ -54,7 +54,7 @@ export default {
 
 .title {
     top: 0;
-    background-color: #e4e6eb;
+    background-color: #ABB2BF;
     position: sticky;
     text-align: center;
     color: #282c34;
@@ -74,31 +74,23 @@ ol {
 a {
     outline: none;
     text-decoration: none;
-    color: #282c34;
+    color: #e4e6eb;
 }
 
 h3 {
-    line-height: 2;
-    border-bottom: 1px solid #282c34;
+    line-height: 2.5;
     text-align: center;
 }
 
 .problem {
     border: solid;
-    border-color: #282c34;
-    border-radius: 6px;
+    border-color: #ABB2BF;
+    border-radius: 10px;
     border-width: 1.5px;
 
     margin-bottom: 10px;
     padding: 10px;
     text-align: center;
     transition: 1s;
-}
-
-.problem:hover {
-    background-color: #282c34;
-    transition: .5s;
-    cursor: pointer;
-    color: #e4e6eb;
 }
 </style>
