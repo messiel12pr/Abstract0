@@ -2,7 +2,7 @@
     <main>
         <div class="problem-set-container">
             <div class="title">
-                <div>Problem Selection</div>
+                <div></div>
                 <hr>
             </div>
             <ul>
@@ -50,6 +50,10 @@ export default {
     width: 800px;
     height: 580px;
     overflow-y: scroll;
+
+    border: solid;
+    border-color: #ABB2BF;
+    border-width: 1px;
 }
 
 .title {
@@ -62,6 +66,11 @@ export default {
 
 .title>hr {
     margin-top: 0px;
+    height: 0px;
+}
+
+.title>div {
+    height: 25px;
 }
 
 ul,
