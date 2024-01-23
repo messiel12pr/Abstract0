@@ -4,7 +4,7 @@
 
         <nav>
             <ul class="nav__links">
-                <li><a href="/editor">Editor</a></li>
+                <li><a href="#">Profile</a></li>
                 <li><a href="/problems">Problems</a></li>
                 <li><a href="#">Resources</a></li>
             </ul>

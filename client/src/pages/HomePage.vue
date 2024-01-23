@@ -11,7 +11,7 @@
                 </div>
                 <h2>FEATURES</h2>
                 <div class="card">
-                    <h3><a href="/editor">Online Code Editor</a></h3>
+                    <h3><a>Online Code Editor</a></h3>
                     <p>Access our robust online code editor, powered by Ace and Judge0, supporting languages such as C++,
                         Python, and Java.</p>
                     <p>Run your code effortlessly without the hassle of setting up a coding environment!</p>
@@ -114,6 +114,7 @@ main .card {
 
 main .card h3 {
     text-align: center;
+    color: #BD93F9;
 }
 
 a {
