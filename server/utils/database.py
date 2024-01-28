@@ -122,3 +122,13 @@ class Database:
 
         except Exception as e:  
             print(e.__str__())
+
+    def count_problems_solved(self, user_id: int):
+        try:
+            with self.engine.connect() as conn:
+                query = text("SELECT COUNT(*) AS row_count FROM submission_details WHERE user_id = (:user_id)")
+                params = {"user_id": user_id}
+                return conn.execute(query, params).all()
+
+        except Exception as e:  
+            print(e.__str__())
