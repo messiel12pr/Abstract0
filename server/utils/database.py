@@ -128,7 +128,7 @@ class Database:
             with self.engine.connect() as conn:
                 query = text("SELECT COUNT(*) AS row_count FROM submission_details WHERE user_id = (:user_id)")
                 params = {"user_id": user_id}
-                return conn.execute(query, params).all()
+                return conn.execute(query, params).all()[0][0]
 
         except Exception as e:  
             print(e.__str__())

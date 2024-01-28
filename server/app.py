@@ -29,6 +29,12 @@ def get_problem_location(id):
     return jsonify(response[0][3])
 
 
+@app.route("/user/<int:id>/problem-solved-count", methods=['GET'])
+@require_auth(None)
+def get_problems_solved(id):
+    response = db.count_problems_solved(id)
+    return jsonify(response)
+
 @app.route("/submit", methods=['POST'])
 @require_auth(None)
 def submit():
