@@ -8,8 +8,9 @@
                 <img v-else src="../assets/images/default_profile_pic.png" alt="profile picture" class="profile__avatar" />
                 <div class="profile__headline">
                     <h2 class="profile__title">{{ user.name }}</h2>
-                    <h3 class="profile__info">Problems solved: {{ numProblemsSolved }}</h3>
-                    <h3 class="profile__info">Contact: <a href="mailto: joel.gonzalez35@upr.edu">email</a></h3>
+                    <h3 class="profile__info">Problems solved: <span>{{ numProblemsSolved }}</span>
+                    </h3>
+                    <h3 class="profile__info">Support: <a href="mailto: joel.gonzalez35@upr.edu">Email</a></h3>
                 </div>
             </div>
         </div>
@@ -104,9 +105,12 @@ a {
 }
 
 .profile__info {
+    padding: 0px 30px;
     border-top: solid;
     border-color: #F1FA8C;
     text-align: left;
     line-height: 100px;
+    display: flex;
+    justify-content: space-between;
 }
 </style>
