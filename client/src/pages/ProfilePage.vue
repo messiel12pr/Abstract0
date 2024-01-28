@@ -7,9 +7,8 @@
                 <img :src="user.picture" alt="Profile" class="profile__avatar" />
                 <div class="profile__headline">
                     <h2 class="profile__title">{{ user.name }}</h2>
-                    <h3 class="profile__info">Easy problems solved: </h3>
-                    <h3 class="profile__info">Medium problems solved: </h3>
-                    <h3 class="profile__info">Hard problems solved: </h3>
+                    <h3 class="profile__info">Problems solved: </h3>
+                    <h3 class="profile__info">Contact: <a href="mailto: joel.gonzalez35@upr.edu">email</a></h3>
                 </div>
             </div>
         </div>
@@ -58,6 +57,11 @@ body {
 
 .profile__headline {
     text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #BD93F9;
 }
 
 .profile__title {
