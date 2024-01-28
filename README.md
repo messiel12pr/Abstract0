@@ -21,7 +21,7 @@
 ### Preview:
 
 ###### Demo:
-[Demo](https://github.com/messiel12pr/Abstract0/assets/95717805/c9ad0d4a-7e5e-468e-b0dd-870735d7ef4e)
+[Demo](https://github.com/messiel12pr/Abstract0/assets/95717805/1d7a759a-d8e2-4411-9b4c-97b1d87d984e)
 
 
 ###### Home Page:
@@ -41,7 +41,7 @@
 
 
 ###### Profile Page:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/6e2ed29c-b410-4a50-a04c-3edec2639fef)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/dd21c907-f356-48da-a1de-c1a3d62d23c1)
 
 
 ###### Log In:
