@@ -10,8 +10,8 @@ def test_problem_category_creation():
     assert db.get_problem_category_id("Linked List", "Joel M. Gonzalez") == [(1,)]
 
 def test_problem_creation():
-    db.create_problem(1, "Append node to list", "/problems/linked_list", "Easy", "Use the tail of the linked list")
-    assert db.get_problem(1) == [(1, 1, "Append node to list", "/problems/linked_list", "Easy", "Use the tail of the linked list")]
+    db.create_problem(1, "Append node to list", "../../coding_problems/Data_Structures/Linked_List/problem_1/problem_description.html", "Easy", "Use the tail of the linked list")
+    assert db.get_problem(1) == [(1, 1, "Append node to list", "../../coding_problems/Data_Structures/Linked_List/problem_1/problem_description.html", "Easy", "Use the tail of the linked list")]
 
 def test_user_creation():
     db.create_user(95717805, 'messiel12pr')
