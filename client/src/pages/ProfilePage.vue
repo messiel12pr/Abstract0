@@ -7,7 +7,7 @@
                 <img :src="user.picture" alt="Profile" class="profile__avatar" />
                 <div class="profile__headline">
                     <h2 class="profile__title">{{ user.name }}</h2>
-                    <h3 class="profile__info">Problems solved: </h3>
+                    <h3 class="profile__info">Problems solved: {{ numProblemsSolved }}</h3>
                     <h3 class="profile__info">Contact: <a href="mailto: joel.gonzalez35@upr.edu">email</a></h3>
                 </div>
             </div>
@@ -15,15 +15,46 @@
     </body>
 </template>
   
-<script setup>
-import { useAuth0 } from "@auth0/auth0-vue";
-const { user } = useAuth0();
-</script>
 
 <script>
 import NavBarComponent from '../components/NavBarComponent.vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-vue";
 
 export default {
+    setup() {
+        const numProblemsSolved = ref(0);
+        const { user, getAccessTokenSilently } = useAuth0();
+
+        onMounted(async () => {
+            await getNumProblemsSolved();
+        });
+
+        const getNumProblemsSolved = async () => {
+            try {
+                const token = await getAccessTokenSilently();
+                const path = `http://localhost:5001/user/${user.value.sub.split("|")[1]}/problem-solved-count`;
+
+                await axios.get(path, { headers: { 'authorization': 'Bearer ' + token } })
+                    .then((res) => {
+                        numProblemsSolved.value = res["data"];
+                    })
+                    .catch((error) => {
+                        console.error(error.data);
+                    });
+            }
+            catch (error) {
+                console.log(error.message)
+            }
+        }
+
+        return {
+            getNumProblemsSolved,
+            numProblemsSolved,
+            user,
+        }
+    },
     components: {
         NavBarComponent,
     },
@@ -66,6 +97,7 @@ a {
 
 .profile__title {
     padding: 20px;
+    line-height: 100px;
 }
 
 .profile__info {
