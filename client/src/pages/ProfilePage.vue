@@ -4,7 +4,8 @@
 
         <div class="card-container">
             <div class="profile__header">
-                <img :src="user.picture" alt="Profile" class="profile__avatar" />
+                <img v-if="user.picture" :src="user.picture" alt="profile picture" class="profile__avatar" />
+                <img v-else src="../assets/images/default_profile_pic.png" alt="profile picture" class="profile__avatar" />
                 <div class="profile__headline">
                     <h2 class="profile__title">{{ user.name }}</h2>
                     <h3 class="profile__info">Problems solved: {{ numProblemsSolved }}</h3>
@@ -21,6 +22,7 @@ import NavBarComponent from '../components/NavBarComponent.vue';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-vue";
+
 
 export default {
     setup() {
@@ -83,6 +85,7 @@ body {
 .profile__avatar {
     border: none;
     border-radius: 300px;
+    width: 400px;
     max-width: 100%;
 }
 
