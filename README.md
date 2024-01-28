@@ -21,8 +21,7 @@
 ### Preview:
 
 ###### Demo:
-[Short Demo](https://github.com/messiel12pr/Abstract0/assets/95717805/b711b610-2f99-4d91-bf84-efb118bcd135)
-
+https://github.com/messiel12pr/Abstract0/assets/95717805/68bdbef5-3f15-4317-a0de-eecec55d06ed
 
 ###### Home Page:
 ![image](https://github.com/messiel12pr/Abstract0/assets/95717805/069db12b-1958-4f8f-b3e8-4c2486ab205c)
