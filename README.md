@@ -45,7 +45,7 @@
 
 
 ###### Log In:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/4ce4db3f-7a17-4a45-8819-ad3faafdb1b3)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/f87fc85f-6152-41c2-90fb-e2e4a397a091)
 
 
 ### Future plans 🚀:
