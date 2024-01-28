@@ -1,22 +1,19 @@
 <template>
-    <NavBarComponent />
+    <body>
+        <NavBarComponent />
 
-    <PageLayout>
-        <div class="content-layout">
-            <h1 id="page-title" class="content__title">Profile Page</h1>
-            <div class="content__body">
-                <div class="profile-grid">
-                    <div class="profile__header">
-                        <img :src="user.picture" alt="Profile" class="profile__avatar" />
-                        <div class="profile__headline">
-                            <h2 class="profile__title">{{ user.name }}</h2>
-                            <span class="profile__description">{{ user.email }}</span>
-                        </div>
-                    </div>
+        <div class="card-container">
+            <div class="profile__header">
+                <img :src="user.picture" alt="Profile" class="profile__avatar" />
+                <div class="profile__headline">
+                    <h2 class="profile__title">{{ user.name }}</h2>
+                    <h3 class="profile__info">Easy problems solved: </h3>
+                    <h3 class="profile__info">Medium problems solved: </h3>
+                    <h3 class="profile__info">Hard problems solved: </h3>
                 </div>
             </div>
         </div>
-    </PageLayout>
+    </body>
 </template>
   
 <script setup>
@@ -34,10 +31,43 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
     font-family: "Arial", sans-serif;
     line-height: 1.6;
     margin: 20px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    height: max-content;
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background-color: #282c34;
+    color: #e4e6eb;
+    border-radius: 8px;
+}
+
+.profile__avatar {
+    border: none;
+    border-radius: 300px;
+    max-width: 100%;
+}
+
+.profile__headline {
+    text-align: center;
+}
+
+.profile__title {
+    padding: 20px;
+}
+
+.profile__info {
+    border-top: solid;
+    border-color: #F1FA8C;
+    text-align: left;
+    line-height: 100px;
 }
 </style>
