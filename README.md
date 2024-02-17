@@ -29,7 +29,7 @@
 
 
 ###### Editor:
-![image](https://github.com/messiel12pr/Abstract0/assets/95717805/0efa7f9c-4eab-4301-b2d6-e892d8cdfbf8)
+![image](https://github.com/messiel12pr/Abstract0/assets/95717805/aed6d39a-c59d-4d29-ba63-4b8e427196ec)
 
 
 ###### Problems Page:
